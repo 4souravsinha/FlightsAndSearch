@@ -3,11 +3,11 @@ const { City } = require('../models/index')
 
 class CityRepository {
 
-    async createCity({ CityName }) {
+    async createCity({ cityName }) {
 
         try {
             const city = await City.create({
-                name: CityName
+                name: cityName
             });
             return city;
         } catch (error) {
@@ -16,11 +16,11 @@ class CityRepository {
         }
     }
 
-    async deleteCity(CityId) {
+    async deleteCity(cityId) {
         try {
             await City.destroy({
                 where: {
-                    id: CityId
+                    id: cityId
                 }
             });
             return true;
