@@ -3,11 +3,11 @@ const { City } = require('../models/index')
 
 class CityRepository {
 
-    async createCity({ cityName }) {
+    async createCity({ name }) { //destructuring object using {}
 
         try {
             const city = await City.create({
-                name: cityName
+                name: name
             });
             return city;
         } catch (error) {
@@ -31,10 +31,10 @@ class CityRepository {
 
     }
 
-    async updateCity(cityId, data) {
+    async updateCity(cityId, { name }) {
 
         try {
-            const city = await City.update({ data }, {
+            const city = await City.update({ name: name }, {
                 where: {
                     id: cityId
                 }
