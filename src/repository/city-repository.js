@@ -6,15 +6,33 @@ class CityRepository {
     async createCity({ name }) { //destructuring object using {}
 
         try {
+            // console.log(name);
             const city = await City.create({
                 name: name
             });
             return city;
         } catch (error) {
             console.log("something went wrong in repository layer");
-            throw error;
+            throw { error };
         }
     }
+
+
+    async createCities({ names }) { //recieves a names array
+        try {
+            // console.log(names);
+
+            const cities = await City.bulkCreate(
+                names
+            );
+            return cities;
+        } catch (error) {
+            console.log("something went wrong in repository layer");
+            throw { error };
+        }
+    }
+
+
 
     async deleteCity(cityId) {
         try {
@@ -62,9 +80,9 @@ class CityRepository {
         try {
             if (filter.name) {
                 const city = City.findAll({
-                    where : {
-                        name : {
-                            [Op.startsWith] : filter.name
+                    where: {
+                        name: {
+                            [Op.startsWith]: filter.name
                         }
                     }
                 })
@@ -77,6 +95,8 @@ class CityRepository {
             throw { err };
         }
     }
+
+
 }
 
 module.exports = CityRepository;

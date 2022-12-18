@@ -24,6 +24,30 @@ const create = async (req, res) => {
     }
 }
 
+//POST MULTIPLE Citites
+
+const createAll = async (req, res) => {
+
+    try {
+        const city = await cityService.createCities(req.body);
+        res.status(201).json({
+            data: city,
+            success: true,
+            message: " Cities created successfully ",
+            error: {}
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            data: {},
+            success: false,
+            message: " Not able to create city ",
+            error: error
+        });
+    }
+}
+
+
 //DELETE -
 const destroy = async (req, res) => {
     try {
@@ -111,5 +135,6 @@ module.exports = {
     destroy,
     update,
     get,
-    getAll
+    getAll,
+    createAll
 }
